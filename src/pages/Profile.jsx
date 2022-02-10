@@ -1,9 +1,17 @@
-import React from 'react'
-import SingIn from './SignIn'
+import { useState ,useEffect } from 'react'
+import { getAuth } from 'firebase/auth'
+
 
 function Profile() {
+  const [user, setUser] = useState(null)
+
+  const auth = getAuth()
+  useEffect(() => {
+    setUser(auth.currentUser);
+  }, [])
+
   return (
-    <div>Profile</div>
+    user ? <h1>{ user.displayName }</h1> : 'Not Logged In'
   )
 }
 
